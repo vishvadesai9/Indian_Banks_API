@@ -44,14 +44,14 @@ def search_api():
     response = search(q,limit,offset)
     return jsonify(response)
 
+@app.route('/')
+def index():
+    return "<h1>Indian Banks API !!</h1>"
+
 @app.errorhandler(404)
 def not_found(e):
     response = {"Message":"Malformed Url"}
     return jsonify(response)
-
-@app.route('/')
-def index():
-    return "<h1>Indian Banks API !!</h1>"
 
 if __name__ == '__main__':
     app.run(debug=True)
