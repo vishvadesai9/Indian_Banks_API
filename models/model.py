@@ -148,7 +148,7 @@ def search(q,limit,offset):
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
         # return {"message":"Internal Server Error"}
-        return {"error": json.dumps(error)}
+        return {"error": str(error)}
     finally:
         if conn is not None:
             conn.close()
