@@ -24,7 +24,7 @@ def autocomplete_api():
     offset = request.args.get("offset")
     response = autocomplete(q,limit,offset)
     # return jsonify(response)
-    return json.dumps(response)
+    return json.dumps(response,indent=4,sort_keys=False)
 
 @app.route('/api/branches')    
 def search_api():
