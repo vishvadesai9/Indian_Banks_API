@@ -66,7 +66,7 @@ def autocomplete(q,limit,offset):
 
         if results:
             results = [dict(row) for row in results]
-            response = {"branches": json.dumps(results)}
+            response = {"branches": results}
             return response
         else:
             return {"response":"NO RESULTS FOUND"}

@@ -1,3 +1,4 @@
+import json
 from flask import Flask, request, jsonify
 
 from models.model import autocomplete, search
@@ -22,7 +23,8 @@ def autocomplete_api():
     limit = request.args.get("limit")
     offset = request.args.get("offset")
     response = autocomplete(q,limit,offset)
-    return jsonify(response)
+    # return jsonify(response)
+    return json.dumps(response)
 
 @app.route('/api/branches')    
 def search_api():
