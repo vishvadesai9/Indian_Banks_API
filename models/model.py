@@ -72,9 +72,7 @@ def autocomplete(q,limit,offset):
             return {"response":"NO RESULTS FOUND"}
 
     except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
         return {"message":"Internal Server Error"}
-        # return {"error": json.dumps(error)}
     finally:
         if conn is not None:
             conn.close()
@@ -141,15 +139,13 @@ def search(q,limit,offset):
 
         if results:
             results = [dict(row) for row in results]
-            response = {"branches": json.dumps(results)}
+            response = {"branches": results}
             return response
         else:
             return {"response":"NO RESULTS FOUND"}
 
     except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
         return {"message":"Internal Server Error"}
-        # return {"error": str(error)}
     finally:
         if conn is not None:
             conn.close()
