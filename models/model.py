@@ -72,7 +72,7 @@ def autocomplete(q,limit,offset):
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-        return {"message":"Internal Server Error"}
+        return {"message":"Internal Error"}
         # return {"error": json.dumps(error)}
     finally:
         if conn is not None:
@@ -147,7 +147,7 @@ def search(q,limit,offset):
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-        return {"message":"Internal Server Error"}
+        return {"message":"Internal Error"}
         # return {"error": str(error)}
     finally:
         if conn is not None:
