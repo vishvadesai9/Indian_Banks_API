@@ -5,10 +5,11 @@ credentials using credentials module and establishes the connection to the datab
 the database for required data then returns appropriate response in the form of dictionary and then closes
 the connection to the database.
 """
+import json
 
 import psycopg2
 from psycopg2.extras import RealDictCursor
-import json
+
 
 from credentials import credentials
 
@@ -65,15 +66,15 @@ def autocomplete(q,limit,offset):
 
         if results:
             results = [dict(row) for row in results]
-            response = {"branches":results}
+            response = {"branches": json.dumps(results)}
             return response
         else:
             return {"response":"NO RESULTS FOUND"}
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-        # return {"message":"Internal Error"}
-        return {"error": json.dumps(error)}
+        return {"message":"Internal Server Error"}
+        # return {"error": json.dumps(error)}
     finally:
         if conn is not None:
             conn.close()
@@ -140,15 +141,15 @@ def search(q,limit,offset):
 
         if results:
             results = [dict(row) for row in results]
-            response = {"branches":results}
+            response = {"branches": json.dumps(results)}
             return response
         else:
             return {"response":"NO RESULTS FOUND"}
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-        # return {"message":"Internal Error"}
-        return {"error": str(error)}
+        return {"message":"Internal Server Error"}
+        # return {"error": str(error)}
     finally:
         if conn is not None:
             conn.close()
