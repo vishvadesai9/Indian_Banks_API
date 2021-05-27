@@ -8,6 +8,7 @@ the connection to the database.
 
 import psycopg2
 from psycopg2.extras import RealDictCursor
+import json
 
 from credentials import credentials
 
@@ -71,7 +72,8 @@ def autocomplete(q,limit,offset):
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-        return {"message":"Internal Server Error"}
+        # return {"message":"Internal Server Error"}
+        return {"error": json.dumps(error)}
     finally:
         if conn is not None:
             conn.close()
@@ -145,7 +147,8 @@ def search(q,limit,offset):
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-        return {"message":"Internal Server Error"}
+        # return {"message":"Internal Server Error"}
+        return {"error": json.dumps(error)}
     finally:
         if conn is not None:
             conn.close()
